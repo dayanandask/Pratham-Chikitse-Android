@@ -19,6 +19,18 @@ In critical emergencies, every second counts. However, reliable internet is not 
 
 It’s not just a manual; it’s an intelligent assistant that speaks your language and guides you through the chaos of an emergency.
 
+---
+
+## 📑 Table of Contents
+- [🌟 Why Pratham Chikitse?](#-why-pratham-chikitse)
+- [✨ Key Features](#-key-features)
+- [🏗️ How it Works (Logic Flow)](#️-how-it-works-logic-flow)
+- [🛠️ Technology Stack](#️-technology-stack)
+- [🚀 Getting Started](#-getting-started)
+- [📂 Project Architecture](#-project-architecture)
+- [🔁 End-to-End Workflow Details](#-end-to-end-workflow-details)
+- [🗺️ Roadmap & Future Enhancements](#️-roadmap--future-enhancements)
+
 ## ✨ Key Features
 
 - **🤖 AI-Powered Triage Chatbot**: A locally running NLP engine that interprets symptoms and suggests immediate first-aid protocols.
@@ -81,6 +93,15 @@ com.example.health/
 │   └── hospital/   # Offline Maps/Directory
 └── util/           # TTS & Localization Helpers
 ```
+
+## 🔁 End-to-End Workflow Details
+The Pratham Chikitse app provides a comprehensive end-to-end solution for medical emergencies:
+
+1. **Initialization & Context**: The app loads instantly due to its local JSON architecture. The user profile, loaded securely via Firebase, prepares language preferences and emergency contacts.
+2. **AI Triage Assessment**: The user interacts with the offline NLP chatbot. It securely parses input text (e.g., "chest pain"), extracting intent via tokenized keyword matching to determine the protocol required without sending data over a network.
+3. **Voice-Guided Navigation**: Once a condition is identified, the app transitions to a step-by-step first-aid view. The Android TTS service automatically synthesizes speech for each step based on the selected vernacular.
+4. **Offline Hospital Locator**: If professional care is required, the app calculates distances to surrounding registered clinics. This happens locally using the Haversine formula combined with fused GPS coordinates.
+5. **SOS Dispatch**: When activated, the SOS sequence instantly dispatches a pre-formatted SMS—embedding GPS data—to emergency contacts, while simultaneously initiating a dial-out to the 108 emergency line.
 
 ## 🗺️ Roadmap & Future Enhancements
 - [ ] **Bluetooth Mesh Networking**: Share location data with nearby responders without cell service.
