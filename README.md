@@ -2,6 +2,7 @@
   <img src="https://img.icons8.com/color/120/000000/first-aid-kit.png" alt="Pratham Chikitse Logo">
   <h1>Pratham Chikitse (First Aid)</h1>
   <p><strong>The Pocket-Sized Life Saver: An Offline-First Emergency Triage Platform</strong></p>
+  <p><strong>Developed by @dayanandask</strong></p>
 
   [![Kotlin](https://img.shields.io/badge/Kotlin-2.0.0-blue.svg?logo=kotlin)](https://kotlinlang.org)
   [![Android](https://img.shields.io/badge/Android-14.0-3DDC84.svg?logo=android)](https://developer.android.com)
@@ -86,19 +87,8 @@ com.example.health/
 - [ ] **AR First Aid**: Use Augmented Reality to overlay bandage or CPR techniques via the camera.
 - [ ] **Vitals Scanning**: Integrate camera-based heart rate and oxygen level estimation.
 
-## 🤝 Contributing
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📄 License
-Distributed under the MIT License. See `LICENSE` for more information.
-
 ---
 <div align="center">
+  Developed by <b>dayanandask</b> as part of the Internship Project.<br>
   Built with ❤️ for a safer world.
 </div>

@@ -1,21 +1,27 @@
 {
-  "name": "health",
+  "name": "pratham-chikitse",
   "version": "1.0.0",
-  "description": "",
+  "description": "Offline-First Emergency Triage and First-Aid Platform",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AlphaDoc1/PrathamChikitse.git"
+    "url": "git+https://github.com/dayanandask/Pratham-Chikitse-Android.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "android",
+    "kotlin",
+    "first-aid",
+    "offline-first",
+    "triage"
+  ],
+  "author": "dayanandask",
+  "license": "MIT",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/AlphaDoc1/PrathamChikitse/issues"
+    "url": "https://github.com/dayanandask/Pratham-Chikitse-Android/issues"
   },
-  "homepage": "https://github.com/AlphaDoc1/PrathamChikitse#readme"
+  "homepage": "https://github.com/dayanandask/Pratham-Chikitse-Android#readme"
 }
