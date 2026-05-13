@@ -108,8 +108,11 @@ The Pratham Chikitse app provides a comprehensive end-to-end solution for medica
 - [ ] **AR First Aid**: Use Augmented Reality to overlay bandage or CPR techniques via the camera.
 - [ ] **Vitals Scanning**: Integrate camera-based heart rate and oxygen level estimation.
 
+## 📝 License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
 ---
 <div align="center">
-  Developed by <b>dayanandask</b> as part of the Internship Project.<br>
+  Developed by <b>dayananda S K</b><br>
   Built with ❤️ for a safer world.
 </div>
