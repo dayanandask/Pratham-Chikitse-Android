@@ -37,6 +37,7 @@ fun HomeScreen(
     onHospitalsClick: () -> Unit,
     onViewAllCategories: () -> Unit,
     onProfileClick: () -> Unit,
+    onBloodMateClick: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -159,14 +160,15 @@ fun HomeScreen(
             )
 
             SectionHeader(title = stringResource(R.string.quick_actions))
-            Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                QuickActionCard(Icons.Filled.Phone, stringResource(R.string.call_108), onSOSClick, Modifier.weight(1f), containerColor = Color(0xFFFFEBEE), contentColor = Color(0xFFC62828))
+            Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                QuickActionCard(Icons.Filled.Phone, "SOS", onSOSClick, Modifier.weight(1f), containerColor = Color(0xFFFFEBEE), contentColor = Color(0xFFC62828))
+                QuickActionCard(Icons.Filled.Group, "BloodMate", onBloodMateClick, Modifier.weight(1f), containerColor = Color(0xFFF3E5F5), contentColor = Color(0xFF7B1FA2))
                 QuickActionCard(
-                    Icons.Filled.SmartToy, stringResource(R.string.ai_assist), onAssistantClick, 
+                    Icons.Filled.SmartToy, "Assist", onAssistantClick, 
                     Modifier.weight(1f).scale(pulseScale), 
                     containerColor = Color(0xFFE3F2FD), contentColor = Color(0xFF1565C0)
                 )
-                QuickActionCard(Icons.Filled.LocalHospital, stringResource(R.string.hospitals), onHospitalsClick, Modifier.weight(1f), containerColor = Color(0xFFE8F5E9), contentColor = Color(0xFF2E7D32))
+                QuickActionCard(Icons.Filled.LocalHospital, "Hospital", onHospitalsClick, Modifier.weight(1f), containerColor = Color(0xFFE8F5E9), contentColor = Color(0xFF2E7D32))
             }
             Spacer(Modifier.height(20.dp))
         }

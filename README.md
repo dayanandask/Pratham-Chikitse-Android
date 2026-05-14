@@ -34,6 +34,9 @@ It’s not just a manual; it’s an intelligent assistant that speaks your langu
 ## ✨ Key Features
 
 - **🤖 AI-Powered Triage Chatbot**: A locally running NLP engine that interprets symptoms and suggests immediate first-aid protocols.
+- **🩸 BloodMate**: A dedicated emergency contact manager categorized by Family, Friends, and Office, including blood group information for immediate access.
+- **📱 Modern WhatsApp-style UI**: A familiar, intuitive navigation bar with labeled icons and smooth animations for a seamless user experience.
+- **👤 Local Profile Management**: Securely store your personal medical details (Age, Blood Group, Height, Weight) locally on the device.
 - **🗣️ Voice-First & TTS**: Fully accessible via Text-to-Speech, reading instructions aloud in regional languages so you can keep your hands free.
 - **🌍 Vernacular Support**: Seamlessly switch between **English, Kannada, Hindi, Gujarati, Marathi, and Tamil**.
 - **📍 Offline Hospital Locator**: Find the nearest medical facility using pre-indexed offline geo-data.
@@ -97,7 +100,8 @@ com.example.health/
 ## 🔁 End-to-End Workflow Details
 The Pratham Chikitse app provides a comprehensive end-to-end solution for medical emergencies:
 
-1. **Initialization & Context**: The app loads instantly due to its local JSON architecture. The user profile, loaded securely via Firebase, prepares language preferences and emergency contacts.
+1. **Initialization & Context**: The app loads instantly due to its local JSON architecture. The user profile stores language preferences and emergency contacts locally on the device for privacy.
+2. **BloodMate & Emergency Contacts**: Manage your circle of safety with the BloodMate feature. Organize contacts by relationship and keep their blood group data ready for quick coordination.
 2. **AI Triage Assessment**: The user interacts with the offline NLP chatbot. It securely parses input text (e.g., "chest pain"), extracting intent via tokenized keyword matching to determine the protocol required without sending data over a network.
 3. **Voice-Guided Navigation**: Once a condition is identified, the app transitions to a step-by-step first-aid view. The Android TTS service automatically synthesizes speech for each step based on the selected vernacular.
 4. **Offline Hospital Locator**: If professional care is required, the app calculates distances to surrounding registered clinics. This happens locally using the Haversine formula combined with fused GPS coordinates.

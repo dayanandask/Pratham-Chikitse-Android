@@ -1,7 +1,7 @@
 package com.example.health.navigation
 
 import androidx.compose.animation.*
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -12,8 +12,11 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -34,6 +37,7 @@ import com.example.health.ui.onboarding.*
 import com.example.health.ui.settings.SettingsScreen
 import com.example.health.ui.sos.SOSScreen
 import com.example.health.ui.theme.HealthThemeExtras
+import com.example.health.ui.healthmate.BloodMateScreen
 
 private data class BottomNavItem(val route: String, val icon: ImageVector, val label: String)
 
@@ -121,6 +125,11 @@ fun AppNavGraph(
                 )
             }
 
+            // BloodMate
+            composable(Screen.BloodMate.route) {
+                BloodMateScreen(onBack = { navController.popBackStack() })
+            }
+
             // Main
             composable(Screen.Home.route) {
                 HomeScreen(
@@ -129,7 +138,8 @@ fun AppNavGraph(
                     onAssistantClick = { navController.navigate(Screen.Assistant.route) },
                     onHospitalsClick = { navController.navigate(Screen.Hospitals.route) },
                     onViewAllCategories = { navController.navigate(Screen.EmergencyList.route) },
-                    onProfileClick = { navController.navigate(Screen.Settings.route) }
+                    onProfileClick = { navController.navigate(Screen.Settings.route) },
+                    onBloodMateClick = { navController.navigate(Screen.BloodMate.route) }
                 )
             }
             composable(Screen.EmergencyList.route) {
@@ -156,7 +166,9 @@ fun AppNavGraph(
                 LearningDetailScreen(modId, onBack = { navController.popBackStack() })
             }
             composable(Screen.Settings.route) {
-                SettingsScreen(onBack = { navController.popBackStack() })
+                SettingsScreen(
+                    onBack = { navController.popBackStack() }
+                )
             }
             composable(Screen.SOS.route) {
                 SOSScreen(
@@ -178,62 +190,66 @@ fun AppNavGraph(
 
 @Composable
 private fun BottomNavBar(navController: NavHostController, currentRoute: String?) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 24.dp, vertical = 20.dp),
-        contentAlignment = Alignment.BottomCenter
+    val highlightColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)
+    
+    NavigationBar(
+        modifier = Modifier.fillMaxWidth(),
+        containerColor = MaterialTheme.colorScheme.surface,
+        tonalElevation = 8.dp
     ) {
-        Surface(
-            shape = RoundedCornerShape(30.dp),
-            color = MaterialTheme.colorScheme.surface,
-            tonalElevation = 8.dp,
-            shadowElevation = 10.dp,
-            border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(72.dp)
-                    .padding(horizontal = 8.dp),
-                horizontalArrangement = Arrangement.SpaceAround,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                bottomNavItems.forEach { item ->
-                    val isSelected = currentRoute == item.route
-                    val tint = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
-                    
-                    if (item.route == "sos_placeholder") {
-                        Surface(
-                            onClick = { navController.navigate(Screen.SOS.route) },
-                            shape = CircleShape,
-                            color = Color(0xFFFF5252),
-                            modifier = Modifier.size(54.dp),
-                            shadowElevation = 4.dp
+        bottomNavItems.forEach { item ->
+            val isSelected = currentRoute == item.route
+            
+            if (item.route == "sos_placeholder") {
+                NavigationBarItem(
+                    selected = false,
+                    onClick = { navController.navigate(Screen.SOS.route) },
+                    icon = {
+                        Box(
+                            modifier = Modifier
+                                .size(48.dp)
+                                .background(Color(0xFFFF5252), CircleShape),
+                            contentAlignment = Alignment.Center
                         ) {
-                            Box(contentAlignment = Alignment.Center) {
-                                Icon(Icons.Filled.Phone, "SOS", tint = Color.White)
+                            Icon(Icons.Filled.Phone, "SOS", tint = Color.White)
+                        }
+                    },
+                    label = { Text("SOS", fontWeight = FontWeight.Bold, color = Color(0xFFFF5252)) }
+                )
+            } else {
+                NavigationBarItem(
+                    selected = isSelected,
+                    onClick = {
+                        if (!isSelected) {
+                            navController.navigate(item.route) {
+                                popUpTo(navController.graph.findStartDestination().id) { saveState = true }
+                                launchSingleTop = true
+                                restoreState = true
                             }
                         }
-                    } else {
-                        IconButton(
-                            onClick = {
-                                navController.navigate(item.route) {
-                                    popUpTo(navController.graph.findStartDestination().id) { saveState = true }
-                                    launchSingleTop = true
-                                    restoreState = true
-                                }
-                            }
-                        ) {
-                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                Icon(item.icon, item.label, tint = tint, modifier = Modifier.size(24.dp))
-                                if (isSelected) {
-                                    Box(Modifier.size(4.dp).background(tint, CircleShape).padding(top = 2.dp))
-                                }
-                            }
-                        }
-                    }
-                }
+                    },
+                    icon = {
+                        Icon(
+                            imageVector = item.icon,
+                            contentDescription = item.label,
+                            modifier = Modifier.size(24.dp)
+                        )
+                    },
+                    label = { 
+                        Text(
+                            text = item.label,
+                            style = MaterialTheme.typography.labelMedium,
+                            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
+                        )
+                    },
+                    colors = NavigationBarItemDefaults.colors(
+                        selectedIconColor = MaterialTheme.colorScheme.primary,
+                        unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
+                        selectedTextColor = MaterialTheme.colorScheme.primary,
+                        unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
+                        indicatorColor = highlightColor
+                    )
+                )
             }
         }
     }

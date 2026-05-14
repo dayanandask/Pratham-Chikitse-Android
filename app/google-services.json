@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "99378926294",
+    "firebase_url": "https://prathama-chikitse-default-rtdb.firebaseio.com",
+    "project_id": "prathama-chikitse",
+    "storage_bucket": "prathama-chikitse.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:99378926294:android:4bfb537ac89714cfdcef77",
+        "android_client_info": {
+          "package_name": "com.example.health"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsU51aGEvtdNkbqYBLwGSNE9lJs3jnKj4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

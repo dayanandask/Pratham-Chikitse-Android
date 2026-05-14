@@ -11,6 +11,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -21,7 +22,10 @@ import com.example.health.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScreen(onBack: () -> Unit, viewModel: SettingsViewModel = hiltViewModel()) {
+fun SettingsScreen(
+    onBack: () -> Unit,
+    viewModel: SettingsViewModel = hiltViewModel()
+) {
     val themeMode by viewModel.themeMode.collectAsStateWithLifecycle()
     val language by viewModel.language.collectAsStateWithLifecycle()
     val highContrast by viewModel.highContrast.collectAsStateWithLifecycle()
@@ -164,12 +168,18 @@ private fun SettingsToggleItem(icon: ImageVector, title: String, subtitle: Strin
 }
 
 @Composable
-private fun SettingsClickItem(icon: ImageVector, title: String, value: String, onClick: () -> Unit) {
+private fun SettingsClickItem(
+    icon: ImageVector,
+    title: String,
+    value: String,
+    textColor: Color = MaterialTheme.colorScheme.onSurface,
+    onClick: () -> Unit
+) {
     Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp), verticalAlignment = Alignment.CenterVertically) {
-        Icon(icon, null, Modifier.size(24.dp), MaterialTheme.colorScheme.onSurfaceVariant)
+        Icon(icon, null, Modifier.size(24.dp), if (textColor == MaterialTheme.colorScheme.error) textColor else MaterialTheme.colorScheme.onSurfaceVariant)
         Spacer(Modifier.width(16.dp))
-        Text(title, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
-        TextButton(onClick) { Text(value) }
+        Text(title, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f), color = textColor)
+        TextButton(onClick) { Text(value, color = if (textColor == MaterialTheme.colorScheme.error) textColor else MaterialTheme.colorScheme.primary) }
     }
 }
 
