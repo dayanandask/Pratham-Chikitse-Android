@@ -25,12 +25,4 @@ object AppModule {
     fun provideUserPreferencesDataStore(
         @ApplicationContext context: Context
     ): UserPreferencesDataStore = UserPreferencesDataStore(context)
-
-    @Provides
-    @Singleton
-    fun provideFirebaseAuth(): com.google.firebase.auth.FirebaseAuth = com.google.firebase.auth.FirebaseAuth.getInstance()
-
-    @Provides
-    @Singleton
-    fun provideFirebaseDatabase(): com.google.firebase.database.FirebaseDatabase = com.google.firebase.database.FirebaseDatabase.getInstance()
 }
